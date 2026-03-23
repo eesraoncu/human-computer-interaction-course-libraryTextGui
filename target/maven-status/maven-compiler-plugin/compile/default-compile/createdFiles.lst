@@ -1,0 +1,6 @@
+hci\library\model\Book.class
+hci\library\controller\LibraryController.class
+hci\library\App.class
+hci\library\model\Library.class
+hci\library\view\ConsoleView.class
+hci\library\view\LanternaView.class
