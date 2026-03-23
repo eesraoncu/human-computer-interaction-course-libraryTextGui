@@ -21,10 +21,7 @@ public class LibraryController {
                 this::handleViewBooks,
                 this::handleBorrowBook,
                 this::handleReturnBook,
-                this::handleExit
-        );
-        // The View blocks on initMainScreen until exit is called if we use addWindowAndWait. 
-        // Once exit is called, the window closes, and this method will return.
+                this::handleExit);
         view.stop();
     }
 
@@ -58,6 +55,5 @@ public class LibraryController {
     }
 
     private void handleExit() {
-        // Just let the view close, which unblocks the start() method. 
     }
 }

@@ -8,7 +8,6 @@ public class Library {
 
     public Library() {
         this.books = new ArrayList<>();
-        // Pre-populate with some sample data
         addBook(new Book("1", "The Lord of the Rings", "J.R.R. Tolkien"));
         addBook(new Book("2", "1984", "George Orwell"));
         addBook(new Book("3", "Pride and Prejudice", "Jane Austen"));
