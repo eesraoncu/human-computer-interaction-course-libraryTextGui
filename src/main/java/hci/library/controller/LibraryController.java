@@ -9,18 +9,27 @@ import java.util.List;
 public class LibraryController {
     private Library library;
     private ConsoleView view;
+    private boolean switchRequested = false;
 
     public LibraryController(Library library, ConsoleView view) {
         this.library = library;
         this.view = view;
     }
 
+    public boolean isSwitchRequested() {
+        return switchRequested;
+    }
+
     public void start() {
+        switchRequested = false;
         view.start();
         view.initMainScreen(
                 this::handleViewBooks,
                 this::handleBorrowBook,
                 this::handleReturnBook,
+                () -> {
+                    switchRequested = true;
+                },
                 this::handleExit);
         view.stop();
     }
