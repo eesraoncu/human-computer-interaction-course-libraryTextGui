@@ -27,6 +27,8 @@ public class LibraryController {
                 this::handleViewBooks,
                 this::handleBorrowBook,
                 this::handleReturnBook,
+                this::handleAddBook,
+                this::handleDeleteBook,
                 () -> {
                     switchRequested = true;
                 },
@@ -37,6 +39,40 @@ public class LibraryController {
     private void handleViewBooks() {
         List<Book> books = library.getAllBooks();
         view.showBooksDialog(books);
+    }
+
+    private void handleAddBook() {
+        String id = view.promptInput("Add Book", "Enter Book ID:");
+        if (id == null || id.trim().isEmpty())
+            return;
+
+        if (library.findBookById(id.trim()) != null) {
+            view.showMessage("Error", "A book with this ID already exists!");
+            return;
+        }
+
+        String title = view.promptInput("Add Book", "Enter Book Title:");
+        if (title == null || title.trim().isEmpty())
+            return;
+
+        String author = view.promptInput("Add Book", "Enter Book Author:");
+        if (author == null || author.trim().isEmpty())
+            return;
+
+        library.addBook(new Book(id.trim(), title.trim(), author.trim()));
+        view.showMessage("Success", "Book successfully added to the library!");
+    }
+
+    private void handleDeleteBook() {
+        String id = view.promptInput("Delete Book", "Enter Book ID to delete:");
+        if (id != null && !id.trim().isEmpty()) {
+            boolean success = library.removeBook(id.trim());
+            if (success) {
+                view.showMessage("Success", "Book deleted successfully!");
+            } else {
+                view.showMessage("Error", "Book not found.");
+            }
+        }
     }
 
     private void handleBorrowBook() {

@@ -34,6 +34,15 @@ public class Library {
         return null;
     }
 
+    public boolean removeBook(String id) {
+        Book book = findBookById(id);
+        if (book != null) {
+            books.remove(book);
+            return true;
+        }
+        return false;
+    }
+
     public boolean borrowBook(String id) {
         Book book = findBookById(id);
         if (book != null && !book.isBorrowed()) {

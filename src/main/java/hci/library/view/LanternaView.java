@@ -70,12 +70,14 @@ public class LanternaView implements ConsoleView {
     }
 
     @Override
-    public void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook,
-            Runnable onSwitchView, Runnable onExit) {
+    public void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
+            Runnable onDeleteBook, Runnable onSwitchView, Runnable onExit) {
         Panel mainPanel = new Panel(new BorderLayout());
 
         Panel leftPanel = new Panel(new GridLayout(1));
         leftPanel.addComponent(new Button("View Books", onViewBooks));
+        leftPanel.addComponent(new Button("Add Book", onAddBook));
+        leftPanel.addComponent(new Button("Delete Book", onDeleteBook));
         leftPanel.addComponent(new Button("Borrow Book", onBorrowBook));
         leftPanel.addComponent(new Button("Return Book", onReturnBook));
         leftPanel.addComponent(new Button("Switch to GUI", () -> {

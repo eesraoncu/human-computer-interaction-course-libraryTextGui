@@ -12,13 +12,13 @@ public class SwingView implements ConsoleView {
     @Override
     public void start() {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            com.formdev.flatlaf.themes.FlatMacDarkLaf.setup();
         } catch (Exception ignored) {
         }
 
         frame = new JDialog((Frame) null, "Library Application - Windows GUI Mode", true);
         frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
+        frame.setSize(650, 500);
         frame.setLocationRelativeTo(null);
     }
 
@@ -30,18 +30,49 @@ public class SwingView implements ConsoleView {
     }
 
     @Override
-    public void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook,
-            Runnable onSwitchView, Runnable onExit) {
-        JPanel mainPanel = new JPanel(new GridLayout(5, 1, 15, 15));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
+    public void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
+            Runnable onDeleteBook, Runnable onSwitchView, Runnable onExit) {
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 15, 15));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
 
+        JLabel titleLabel = new JLabel("Library Control Panel", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        mainPanel.add(titleLabel);
         JButton btnView = new JButton("View All Books");
+        JButton btnAdd = new JButton("Add Book");
+        JButton btnDelete = new JButton("Delete Book");
         JButton btnBorrow = new JButton("Borrow Book");
         JButton btnReturn = new JButton("Return Book");
         JButton btnSwitch = new JButton("Switch to Text Mode (TUI)");
         JButton btnExit = new JButton("Exit Application");
 
+        Font buttonFont = new Font("Segoe UI", Font.PLAIN, 16);
+        btnView.setFont(buttonFont);
+        btnAdd.setFont(buttonFont);
+        btnDelete.setFont(buttonFont);
+        btnBorrow.setFont(buttonFont);
+        btnReturn.setFont(buttonFont);
+        btnSwitch.setFont(buttonFont);
+        btnExit.setFont(buttonFont);
+
+        btnAdd.setBackground(new Color(46, 204, 113));
+        btnAdd.setForeground(Color.WHITE);
+
+        btnDelete.setBackground(new Color(231, 76, 60));
+        btnDelete.setForeground(Color.WHITE);
+
+        btnBorrow.setBackground(new Color(52, 152, 219));
+        btnBorrow.setForeground(Color.WHITE);
+
+        btnReturn.setBackground(new Color(241, 196, 15));
+        btnReturn.setForeground(Color.BLACK);
+
+        btnSwitch.setBackground(new Color(142, 68, 173));
+        btnSwitch.setForeground(Color.WHITE);
+
         btnView.addActionListener(e -> onViewBooks.run());
+        btnAdd.addActionListener(e -> onAddBook.run());
+        btnDelete.addActionListener(e -> onDeleteBook.run());
         btnBorrow.addActionListener(e -> onBorrowBook.run());
         btnReturn.addActionListener(e -> onReturnBook.run());
 
@@ -56,6 +87,8 @@ public class SwingView implements ConsoleView {
         });
 
         mainPanel.add(btnView);
+        mainPanel.add(btnAdd);
+        mainPanel.add(btnDelete);
         mainPanel.add(btnBorrow);
         mainPanel.add(btnReturn);
         mainPanel.add(btnSwitch);
