@@ -8,7 +8,7 @@ public interface ConsoleView {
 
     void stop();
 
-    void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
+    void initMainScreen(Runnable onViewBooks, Runnable onSearchBook, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
             Runnable onDeleteBook, Runnable onSwitchView, Runnable onExit);
 
     void showBooksDialog(List<Book> books);

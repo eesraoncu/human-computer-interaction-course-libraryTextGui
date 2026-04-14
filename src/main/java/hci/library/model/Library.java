@@ -60,4 +60,18 @@ public class Library {
         }
         return false;
     }
+
+    public List<Book> searchBooks(String query) {
+        List<Book> result = new ArrayList<>();
+        if (query == null || query.trim().isEmpty()) return result;
+        String lowerQuery = query.toLowerCase();
+        for (Book book : books) {
+            if (book.getTitle().toLowerCase().contains(lowerQuery) || 
+                book.getAuthor().toLowerCase().contains(lowerQuery) ||
+                book.getId().toLowerCase().contains(lowerQuery)) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
 }

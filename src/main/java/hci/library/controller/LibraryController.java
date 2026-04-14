@@ -25,6 +25,7 @@ public class LibraryController {
         view.start();
         view.initMainScreen(
                 this::handleViewBooks,
+                this::handleSearchBook,
                 this::handleBorrowBook,
                 this::handleReturnBook,
                 this::handleAddBook,
@@ -39,6 +40,18 @@ public class LibraryController {
     private void handleViewBooks() {
         List<Book> books = library.getAllBooks();
         view.showBooksDialog(books);
+    }
+
+    private void handleSearchBook() {
+        String query = view.promptInput("Search Book", "Enter title, author, or ID:");
+        if (query != null && !query.trim().isEmpty()) {
+            List<Book> results = library.searchBooks(query.trim());
+            if (results.isEmpty()) {
+                view.showMessage("Search Results", "No books found matching: " + query);
+            } else {
+                view.showBooksDialog(results);
+            }
+        }
     }
 
     private void handleAddBook() {

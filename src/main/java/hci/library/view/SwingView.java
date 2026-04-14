@@ -30,30 +30,35 @@ public class SwingView implements ConsoleView {
     }
 
     @Override
-    public void initMainScreen(Runnable onViewBooks, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
+    public void initMainScreen(Runnable onViewBooks, Runnable onSearchBook, Runnable onBorrowBook, Runnable onReturnBook, Runnable onAddBook,
             Runnable onDeleteBook, Runnable onSwitchView, Runnable onExit) {
-        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 15, 15));
+        JPanel mainPanel = new JPanel(new GridLayout(9, 1, 15, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
 
         JLabel titleLabel = new JLabel("Library Control Panel", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 26));
         mainPanel.add(titleLabel);
-        JButton btnView = new JButton("View All Books");
+        JButton btnView = new JButton("View Books");
+        JButton btnSearch = new JButton("Search Book");
         JButton btnAdd = new JButton("Add Book");
         JButton btnDelete = new JButton("Delete Book");
         JButton btnBorrow = new JButton("Borrow Book");
         JButton btnReturn = new JButton("Return Book");
-        JButton btnSwitch = new JButton("Switch to Text Mode (TUI)");
-        JButton btnExit = new JButton("Exit Application");
+        JButton btnSwitch = new JButton("Switch Mode");
+        JButton btnExit = new JButton("Exit");
 
         Font buttonFont = new Font("Segoe UI", Font.PLAIN, 16);
         btnView.setFont(buttonFont);
+        btnSearch.setFont(buttonFont);
         btnAdd.setFont(buttonFont);
         btnDelete.setFont(buttonFont);
         btnBorrow.setFont(buttonFont);
         btnReturn.setFont(buttonFont);
         btnSwitch.setFont(buttonFont);
         btnExit.setFont(buttonFont);
+
+        btnSearch.setBackground(new Color(243, 156, 18));
+        btnSearch.setForeground(Color.WHITE);
 
         btnAdd.setBackground(new Color(46, 204, 113));
         btnAdd.setForeground(Color.WHITE);
@@ -71,6 +76,7 @@ public class SwingView implements ConsoleView {
         btnSwitch.setForeground(Color.WHITE);
 
         btnView.addActionListener(e -> onViewBooks.run());
+        btnSearch.addActionListener(e -> onSearchBook.run());
         btnAdd.addActionListener(e -> onAddBook.run());
         btnDelete.addActionListener(e -> onDeleteBook.run());
         btnBorrow.addActionListener(e -> onBorrowBook.run());
@@ -87,6 +93,7 @@ public class SwingView implements ConsoleView {
         });
 
         mainPanel.add(btnView);
+        mainPanel.add(btnSearch);
         mainPanel.add(btnAdd);
         mainPanel.add(btnDelete);
         mainPanel.add(btnBorrow);
